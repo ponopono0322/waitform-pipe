@@ -19,24 +19,40 @@ waitform-pipe
 ```
 
 ## Prerequisites
-- python 3.7
-- pytorch 1.9
+- python 3.7+
+- pytorch 1.9+
 - 기타 라이브러리는 `requirements.txt`를 참고해주세요.
 
 ## Environment Setting
-아래의 설치법 중 익숙한 환경으로 구성하세요.  
+아래 중 익숙한 방식으로 환경으로 구성하세요.  
 1. Conda
-- `requirements.yaml` 파일로 쉽게 설치하세요.
+- `requirements.yaml` 파일로 가상환경과 라이브러리를 함께 설치합니다.
   ```bash
   conda env create -f requirements.yaml
   ```
+- 아래의 명령어로 만들어진 가상환경을 실행시킵니다.
+  ```bash
+  conda activate wait
+  ```
 
 2. pip
-   ```bash
-   pip install -r requirements.txt
-   ```
+- `venv`를 이용해 새 가상환경을 만듭니다.
+  ```bash
+  python -m venv wait
+  ```
+- 만들어진 가상환경에 접속합니다.
+  ```bash
+  cd wait
+  activate.bat
+  ```
+- `requirements.txt` 파일로 필요 라이브러리를 설치합니다.
+  ```bash
+  pip install -r requirements.txt
+  ```
 
 3. Docker
-   ```bash
+- 준비중입니다
+  ```bash
+  # please wait
+  ```
 
-   ```
