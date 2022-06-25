@@ -27,12 +27,12 @@ class chromedriver:
 
     # link -> data 함수
     def getdata(self):
-        self.linkdf.drop_duplicates(inplace=True)       # 중복 제거
+        self.linkdf.drop_duplicates(inplace=True)   # 중복 제거
         for pos, URL in zip(self.linkdf['position'], self.linkdf['link']):  # 링크 방문하면서 데이터 조회
-            if URL.find('wanted.co.kr') > 0:            # wanted 사이트인 경우
-                data = self.wantedata(pos, URL)         # 텍스트 데이터
-            elif URL.find('incruit.com') > 0:           # incruit 사이트인 경우
-                data = self.incruitdata(pos, URL)       # 텍스트 데이터
+            if URL.find('wanted.co.kr') > 0:        # wanted 사이트인 경우
+                data = self.wantedata(URL)          # 텍스트 데이터
+            elif URL.find('incruit.com') > 0:       # incruit 사이트인 경우
+                data = self.incruitdata(URL)        # 텍스트 데이터
 
             tmp = pd.DataFrame([[pos, data]], columns=['position', 'data'])     # 임시 데이터프레임
             self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)      # 데이터 합치기
@@ -44,7 +44,7 @@ class chromedriver:
         try:                        # 요소가 있는지 검사, 있다면 텍스트 데이터 가져오기
             data = self.driver.find_element(By.CLASS_NAME, "JobContent_descriptionWrapper__SM4UD").text
         except:                     # 만약 요소가 없다면
-            data = ''               # 빈 데이터를 반환
+            data = None             # 빈 데이터를 반환
         return data                 # 데이터 반환
 
     # incruit 사이트 공고문 데이터
@@ -56,7 +56,7 @@ class chromedriver:
             self.driver.switch_to.frame(content)                        # 프레임 전환
             data = self.driver.find_element(By.ID, "content_job").text  # 텍스트 데이터 가져오기
         except:                     # 만약 요소가 없다면
-            data = ''               # 빈 데이터를 반환
+            data = None             # 빈 데이터를 반환
         return data                 # 데이터 반환
 
     # 페이지 갱신 대기
