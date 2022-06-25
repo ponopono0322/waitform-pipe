@@ -49,6 +49,7 @@ class Wanted(chromedriver):
 
             time.sleep(1)
             self.scroll(c_name)     # 스크롤 함수 실행
+        print(self.linkdf)
 
     # 스크롤을 통한 데이터 수집
     def scroll(self, pos):
@@ -78,3 +79,17 @@ class Wanted(chromedriver):
             tmp = pd.DataFrame([[pos, link]], columns=['position', 'link'])     # 임시 데이터프레임
             self.linkdf = pd.concat([self.linkdf, tmp], ignore_index=True)      # 데이터프레임 합치기
             
+    # link -> data 함수
+    def getdata(self):
+        self.linkdf.drop_duplicates(inplace=True)   # 중복 제거
+        for pos, URL in zip(self.linkdf['position'], self.linkdf['link']):  # 링크 방문하면서 데이터 조회
+            self.driver.get(URL)        # 링크 방문
+            self.waiting()              # 갱신 대기
+            try:                        # 요소가 있는지 검사, 있다면 텍스트 데이터 가져오기
+                data = self.driver.find_element(By.CLASS_NAME, "JobContent_descriptionWrapper__SM4UD").text
+            except:                     # 만약 요소가 없다면
+                data = None             # 빈 데이터를 반환
+
+            tmp = pd.DataFrame([[pos, data]], columns=['position', 'data'])     # 임시 데이터프레임
+            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)      # 데이터 합치기
+        return self.datadf
