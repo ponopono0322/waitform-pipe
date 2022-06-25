@@ -27,20 +27,46 @@ class chromedriver:
 
     # link -> data 함수
     def getdata(self):
-        for pos, URL in zip(self.linkdf['position'], self.linkdf['link']):
-            self.driver.get(URL)
-            self.driver.implicitly_wait(time_to_wait=60)
-            try:
-                data = self.driver.find_element(By.CLASS_NAME, "JobContent_descriptionWrapper__SM4UD")
-            except:
-                data = None
-            tmp = pd.DataFrame([[pos, data.text]], columns=['position', 'data'])
-            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)
+        self.linkdf.drop_duplicates(inplace=True)       # 중복 제거
+        for pos, URL in zip(self.linkdf['position'], self.linkdf['link']):  # 링크 방문하면서 데이터 조회
+            if URL.find('wanted.co.kr') > 0:            # wanted 사이트인 경우
+                data = self.wantedata(pos, URL)         # 텍스트 데이터
+            elif URL.find('incruit.com') > 0:           # incruit 사이트인 경우
+                data = self.incruitdata(pos, URL)       # 텍스트 데이터
+
+            tmp = pd.DataFrame([[pos, data]], columns=['position', 'data'])     # 임시 데이터프레임
+            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)      # 데이터 합치기
+
+    # wanted 사이트 공고문 데이터
+    def wantedata(self, URL):   
+        self.driver.get(URL)        # 링크 방문
+        self.waiting()              # 갱신 대기
+        try:                        # 요소가 있는지 검사, 있다면 텍스트 데이터 가져오기
+            data = self.driver.find_element(By.CLASS_NAME, "JobContent_descriptionWrapper__SM4UD").text
+        except:                     # 만약 요소가 없다면
+            data = ''               # 빈 데이터를 반환
+        return data                 # 데이터 반환
+
+    # incruit 사이트 공고문 데이터
+    def incruitdata(self, URL):
+        self.driver.get(URL)        # 링크 방문
+        self.waiting()              # 갱신 대기
+        try:
+            content = self.driver.find_element(By.TAG_NAME, "iframe")   # 프레임 요소
+            self.driver.switch_to.frame(content)                        # 프레임 전환
+            data = self.driver.find_element(By.ID, "content_job").text  # 텍스트 데이터 가져오기
+        except:                     # 만약 요소가 없다면
+            data = ''               # 빈 데이터를 반환
+        return data                 # 데이터 반환
+
+    # 페이지 갱신 대기
+    def waiting(self, time=60):
+        self.driver.implicitly_wait(time_to_wait=time)
 
     # 크롬 드라이버 닫는 함수
     def close(self):
         self.driver.close()
-        
+
     # 크롬 드라이버 종료 함수
     def quit(self):
         self.driver.quit()
