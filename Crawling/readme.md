@@ -26,7 +26,7 @@
   ```
 - 사이트에 대한 링크나 데이터를 독립적인 파일로 저장하고 싶다면 `run.py`파일에 다음과 같은 절차를 수행하세요.
   - 링크 데이터를 저장하고 싶은 경우  
-  ```python
+    ```python
     # 1. 먼저 getlink() 함수를 실행합니다
     c_wanted.getlink()
 
@@ -36,9 +36,9 @@
 
     # 3. exporttocsv() 함수를 실행시킵니다.
     c_wanted.exporttocsv(path=file_name, type=file_type)
-  ```
+    ```
   - 공고문 데이터를 저장하고 싶은 경우
-  ```python
+    ```python
     # 1. 먼저 getdata() 함수를 실행합니다
     c_wanted.getdata()
 
@@ -48,4 +48,4 @@
 
     # 3. exporttocsv() 함수를 실행시킵니다.
     c_wanted.exporttocsv(path=file_name, type=file_type)
-  ```
+    ```
