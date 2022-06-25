@@ -2,6 +2,7 @@ import time
 import pandas as pd
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 
 from ChromeDriver import chromedriver
 
@@ -34,10 +35,10 @@ class Incruit(chromedriver):
                         tg = i.find_element(By.XPATH, "..")
                         tg.click()              # 같다면 선택하기
                         break
-
+                        
             time.sleep(1)
             sh = self.driver.find_element(By.ID, "SearchResultCount")   # 조건 검색하기 버튼
-            sh.click()      # 선택된 태그로 검색하기
+            sh.send_keys(Keys.ENTER)            # 선택된 태그로 검색하기     
             
             n_btn = True
             while n_btn:
@@ -46,9 +47,6 @@ class Incruit(chromedriver):
 
                 if n_btn:
                     n_btn.click()
-                break
-            break
-            time.sleep(1)
 
     def isnext(self):
         try:
@@ -62,7 +60,7 @@ class Incruit(chromedriver):
         self.waiting()
 
         for item in self.driver.find_elements(By.CLASS_NAME, "c_row"):
-            li = item.find_element(By.CLASS_NAME, "c_col").find_element(
-                By.CLASS_NAME, "cell_mid").find_element(By.CLASS_NAME, "cl_top").find_element(By.TAG_NAME, "a")
+            li = item.find_element(By.CLASS_NAME, "c_col").find_element(By.CLASS_NAME, 
+                "cell_mid").find_element(By.CLASS_NAME, "cl_top").find_element(By.TAG_NAME, "a")
             tmp = pd.DataFrame([[pos, li.get_attribute('href')]] , columns=['position', 'link'])
             self.linkdf = pd.concat([self.linkdf, tmp], ignore_index=True)
