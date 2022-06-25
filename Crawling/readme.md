@@ -30,11 +30,11 @@
     # 1. 먼저 getlink() 함수를 실행합니다
     c_wanted.getlink()
 
-    # 2. 파일명(이름+.csv)과 타입("link")을 지정합니다.
-    file_name = "link_filename.csv"
+    # 2. 파일명(경로+이름+.csv)과 타입("link")을 지정합니다
+    file_name = "./data/link_filename.csv"
     file_type = "link"
 
-    # 3. exporttocsv() 함수를 실행시킵니다.
+    # 3. exporttocsv() 함수를 실행시킵니다
     c_wanted.exporttocsv(path=file_name, type=file_type)
     ```
   - 공고문 데이터를 저장하고 싶은 경우
@@ -42,10 +42,23 @@
     # 1. 먼저 getdata() 함수를 실행합니다
     c_wanted.getdata()
 
-    # 2. 파일명(이름+.csv)과 타입("data")을 지정합니다.
-    file_name = "data_filename.csv"
+    # 2. 파일명(경로+이름+.csv)과 타입("data")을 지정합니다
+    file_name = "./data/data_filename.csv"
     file_type = "data"
 
-    # 3. exporttocsv() 함수를 실행시킵니다.
+    # 3. exporttocsv() 함수를 실행시킵니다
     c_wanted.exporttocsv(path=file_name, type=file_type)
     ```
+
+## For Convenience..
+편의를 위해 본문 데이터를 [여기]()에서 다운받아 사용할 수 있습니다. 파일 구조는 다음과 같이 구성합니다.
+```bash
+waitform-pipe
+├── Crwaling            # crawling folder
+│   ├── data
+│   │   ├── link_filename.csv
+│   │   └── data_filename.csv
+│   │
+│   └── *.py            # crawling codes
+:   :                   # 기존 파일들..
+```
