@@ -50,6 +50,9 @@ class Incruit(chromedriver):
                 if n_btn:                       # 다음 페이지가 있다면
                     n_btn.click()               # 다음 페이지 넘기기 클릭
 
+        print(self.linkdf)
+        return self.linkdf
+
     # 다음 페이지 넘기는 함수
     def isnext(self):
         try:         # 만약 다음 페이지를 넘기는 요소가 있다면
@@ -68,7 +71,7 @@ class Incruit(chromedriver):
             li = item.find_element(By.CLASS_NAME, "c_col").find_element(By.CLASS_NAME, 
                 "cell_mid").find_element(By.CLASS_NAME, "cl_top").find_element(By.TAG_NAME, "a")
             # 임시 데이터프레임 저장
-            tmp = pd.DataFrame([[pos, li.get_attribute('href')]] , columns=['position', 'link'])
+            tmp = pd.DataFrame([[pos, li.get_attribute('href'), 'F']] , columns=super().getlinkcol())
             self.linkdf = pd.concat([self.linkdf, tmp], ignore_index=True)  # 데이터 저장
 
     # link -> data 함수
@@ -85,6 +88,6 @@ class Incruit(chromedriver):
             except:                     # 만약 요소가 없다면
                 data = None             # 빈 데이터를 반환
 
-            tmp = pd.DataFrame([[pos, data]], columns=['position', 'data'])     # 임시 데이터프레임
-            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)      # 데이터 합치기
+            tmp = pd.DataFrame([[pos, data, 'F']], columns=super().getdatacol()) # 임시 데이터프레임
+            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)   # 데이터 합치기
         return self.datadf

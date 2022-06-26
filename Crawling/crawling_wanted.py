@@ -49,7 +49,9 @@ class Wanted(chromedriver):
 
             time.sleep(1)
             self.scroll(c_name)     # 스크롤 함수 실행
+
         print(self.linkdf)
+        return self.linkdf
 
     # 스크롤을 통한 데이터 수집
     def scroll(self, pos):
@@ -69,14 +71,14 @@ class Wanted(chromedriver):
             # 같지 않으면 스크롤 위치 값을 수정하여 같아질 때까지 반복 
             else: # 스크롤 위치값을 수정
                 scroll_location = self.driver.execute_script("return document.body.scrollHeight")
-
+                
         time.sleep(1)
         # 링크 데이터를 가진 클래스
         div = self.driver.find_elements(By.CLASS_NAME, "Card_className__u5rsb")
 
         for item in div:    # 데이터 순회
             link = item.find_element(By.TAG_NAME, "a").get_attribute('href')    # 링크 수집
-            tmp = pd.DataFrame([[pos, link]], columns=['position', 'link'])     # 임시 데이터프레임
+            tmp = pd.DataFrame([[pos, link, 'F']], columns=super().getlinkcol())# 임시 데이터프레임
             self.linkdf = pd.concat([self.linkdf, tmp], ignore_index=True)      # 데이터프레임 합치기
             
     # link -> data 함수
@@ -90,6 +92,6 @@ class Wanted(chromedriver):
             except:                     # 만약 요소가 없다면
                 data = None             # 빈 데이터를 반환
 
-            tmp = pd.DataFrame([[pos, data]], columns=['position', 'data'])     # 임시 데이터프레임
-            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)      # 데이터 합치기
+            tmp = pd.DataFrame([[pos, data, 'F']], columns=super().getdatacol())     # 임시 데이터프레임
+            self.datadf = pd.concat([self.datadf, tmp], ignore_index=True)  # 데이터 합치기
         return self.datadf
