@@ -19,8 +19,8 @@ waitform-pipe
 ```
 
 ## Prerequisites
-- python 3.8+
-- pytorch 1.9+
+- python 3.8
+- pytorch 1.11
 - 기타 라이브러리는 `requirements.txt`를 참고해주세요.
 
 ## Environment Setting
