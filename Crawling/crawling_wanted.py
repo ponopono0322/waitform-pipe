@@ -33,10 +33,12 @@ class Wanted(chromedriver):
         for c_name, p_name in self.columns.items():         # 컬럼 사전으로부터 데이터 크롤링 시도
             self.driver.get(self.URL)                       # 원티드 사이트 개발자 주소
             self.driver.implicitly_wait(time_to_wait=60)    # 사이트 갱신 대기
-            # 목록 창
-            dr = self.driver.find_element(By.CLASS_NAME, "JobCategory_JobCategory__btn__k3EFe")
-            dr.click()      # 목록창 열기
-            time.sleep(1)   # 잠깐 대기
+            try:                # 목록 창
+                dr = self.driver.find_element(By.CLASS_NAME, "JobCategory_JobCategory__btn__k3EFe")
+                dr.click()      # 목록창 열기
+                time.sleep(1)   # 잠깐 대기
+            except:
+                continue
 
             for position in p_name:             # 사전 value 값 가져오기
                 for i in self.driver.find_elements(By.TAG_NAME, "button"):  # 버튼 태그 목록 가져와서
