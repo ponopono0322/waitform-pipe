@@ -1,5 +1,6 @@
 # for mac
 *.DS_Store
+*__MACOSX
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
