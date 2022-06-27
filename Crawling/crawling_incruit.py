@@ -49,8 +49,8 @@ class Incruit(chromedriver):
 
                 if n_btn:                       # 다음 페이지가 있다면
                     n_btn.click()               # 다음 페이지 넘기기 클릭
-
-        print(self.linkdf)
+                break
+            break
         return self.linkdf
 
     # 다음 페이지 넘기는 함수

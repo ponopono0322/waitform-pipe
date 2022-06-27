@@ -51,8 +51,7 @@ class Wanted(chromedriver):
 
             time.sleep(1)
             self.scroll(c_name)     # 스크롤 함수 실행
-
-        print(self.linkdf)
+            break
         return self.linkdf
 
     # 스크롤을 통한 데이터 수집
@@ -73,7 +72,7 @@ class Wanted(chromedriver):
             # 같지 않으면 스크롤 위치 값을 수정하여 같아질 때까지 반복 
             else: # 스크롤 위치값을 수정
                 scroll_location = self.driver.execute_script("return document.body.scrollHeight")
-                
+            break
         time.sleep(1)
         # 링크 데이터를 가진 클래스
         div = self.driver.find_elements(By.CLASS_NAME, "Card_className__u5rsb")
