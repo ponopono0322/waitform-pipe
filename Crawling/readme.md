@@ -18,36 +18,25 @@
 |AI |인공지능/빅데이터 |빅데이터분석가, 데이터개발, 데이터마이닝, 시각화, 딥러닝, 머신러닝, 빅데이터 |머신러닝, 인공지능(AI) |머신러닝 엔지니어, 데이터 사이언티스트, 빅데이터 엔지니어, BI 엔지니어 |
 
 ## Crawling Example
-- 다음 명령어를 통해 전체 사이트에 대한 크롤링을 수행할 수 있습니다.
+- 다음과 같은 명령어를 통해 전체 사이트에 대한 크롤링을 수행할 수 있습니다.
   ```bash
-  # 아래와 같이 waitform-pipe의 최상위 폴더에서 Crawling 폴더로 이동하세요
-  # (wait) [os-name] Crawling %
-  >>> (wait) [os-name] Crawling % python run.py
+  >>> (wait) [os-name] waitform-pipe % python Crawling/run.py
   ```
-- 사이트에 대한 링크나 데이터를 독립적인 파일로 저장하고 싶다면 `run.py`파일에 다음과 같은 절차를 수행하세요.
-  - 링크 데이터를 저장하고 싶은 경우  
+- 사이트에 대한 링크와 데이터를 파일로 저장하고 싶다면 `run.py`파일에 다음과 같은 절차를 수행하세요.
     ```python
-    # 1. 먼저 getlink() 함수를 실행합니다
-    c_wanted.getlink()
+    # 1. 먼저 CSVhandler 클래스를 불러옵니다
+    from CSVhandler import CSVhandler
+    cvhd = CSVhandler()
 
     # 2. 파일명(경로+이름+.csv)과 타입("link")을 지정합니다
-    file_name = "./data/link_filename.csv"
-    file_type = "link"
+    link_path = "[filename].csv"
+    data_path = "[filename].csv"
 
-    # 3. exporttocsv() 함수를 실행시킵니다
-    c_wanted.exporttocsv(path=file_name, type=file_type)
-    ```
-  - 공고문 데이터를 저장하고 싶은 경우
-    ```python
-    # 1. 먼저 getdata() 함수를 실행합니다
-    c_wanted.getdata()
+    # 3. crawling() 함수에서 save_ops argument를 True로 변경합니다(기본값 False)
+    crawling(cvhd, c_wanted, link_path, data_path, save_ops=True)
 
-    # 2. 파일명(경로+이름+.csv)과 타입("data")을 지정합니다
-    file_name = "./data/data_filename.csv"
-    file_type = "data"
-
-    # 3. exporttocsv() 함수를 실행시킵니다
-    c_wanted.exporttocsv(path=file_name, type=file_type)
+    # 4. 다음 경로에서 확인하세요
+    waitform-pipe/Crawling/data/[filename].csv
     ```
 
 ## For Convenience..
@@ -64,9 +53,9 @@ waitform-pipe
 ```
 
 ## Requirements
-위 파일을 실행하기 위한 필요 라이브러리입니다. 현재 디렉토리(Crawling)에서 다음을 실행하세요.
+위 파일을 실행하기 위한 필요 라이브러리입니다. 다음 명령어를 실행하세요.
 ```bash
-pip install -r requirements.txt
+pip install -r Crawling/requirements.txt
 ```
 - numpy==1.23.0
 - pandas==1.4.3

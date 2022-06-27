@@ -24,11 +24,16 @@ def main():
     return 0
 
 
-def crawling(cvhd, c_class, link_path, data_path):
+def crawling(cvhd, c_class, link_path, data_path, save_ops=False):
     cl_tmp = c_class.getlink()                         # 링크 데이터 크롤링
+    if save_ops:                                       # 별도 저장 옵션을 사용한 경우
+        cvhd.exporttocsv(link_path, cl_tmp, 'link')
     cl_new = cvhd.searchnewdata(link_path, cl_tmp, 'link') # 새 데이터 찾기
     c_class.datacheck(cl_new, type='link')             # 새 데이터 적용
     c_tmp = c_class.getdata()                          # 공고문 데이터
+
+    if save_ops:                                       # 별도 저장 옵션을 사용한 경우
+        cvhd.exporttocsv(data_path, c_tmp, 'link')
     c_new = cvhd.searchnewdata(data_path, c_tmp, 'data')
 
     cvhd.mergecsv(link_path, cl_new, 'link')

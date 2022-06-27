@@ -1,18 +1,18 @@
 import pandas as pd
 import os
 import zipfile
-os.chdir(os.getcwd()+'/data')
+os.chdir(os.getcwd()+'/Crawling/data')
 
 class CSVhandler:
     def __init__(self):
         pass
 
     # df -> csv 함수
-    def exporttocsv(self, path, type='data'):
+    def exporttocsv(self, path, df, type='data'):
         if type == 'link':                                  # 링크 데이터 csv 저장
-            self.linkdf.to_csv(path, index=False, encoding='utf-8')
+            df.to_csv(path, index=False, encoding='utf-8')
         else:                                               # 공고문 데이터 csv 저장
-            self.datadf.to_csv(path, index=False, encoding='utf-8')
+            df.to_csv(path, index=False, encoding='utf-8')
     
     # 파일 검사
     def filecheck(self, path):
