@@ -56,9 +56,20 @@
 waitform-pipe
 ├── Crwaling            # crawling folder
 │   ├── data
-│   │   ├── link_filename.csv
-│   │   └── data_filename.csv
+│   │   ├── [link_filename].csv
+│   │   └── [data_filename].csv
 │   │
 │   └── *.py            # crawling codes
 :   :                   # 기존 파일들..
 ```
+
+## Requirements
+위 파일을 실행하기 위한 필요 라이브러리입니다. 현재 디렉토리(Crawling)에서 다음을 실행하세요.
+```bash
+pip install -r requirements.txt
+```
+- numpy==1.23.0
+- pandas==1.4.3
+- selenium==4.3.0
+- beautifulsoup4==4.11.1
+- chromedriver-autoinstaller==0.3.1

@@ -10,12 +10,12 @@ def main():
 
     # wanted 사이트
     url = "https://www.wanted.co.kr/wdlist/518?country=kr&job_sort=company.response_rate_order&years=-1&locations=all"
-    c_wanted = Wanted(url, True)        # 새 객체 생성
+    c_wanted = Wanted(url, False)        # 새 객체 생성
     crawling(cvhd, c_wanted, link_path, data_path)
 
     # incruit 사이트
     url = "https://job.incruit.com/jobdb_list/searchjob.asp?ct=1&ty=1&cd=150"
-    c_incruit = Incruit(url, True)     # 새 객체 생성
+    c_incruit = Incruit(url, False)     # 새 객체 생성
     crawling(cvhd, c_incruit, link_path, data_path)
 
     del c_wanted        # 소멸자 호출
