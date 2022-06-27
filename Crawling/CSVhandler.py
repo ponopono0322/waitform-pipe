@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import zipfile
-os.chdir('./data')
+os.chdir(os.getcwd()+'/data')
 
 class CSVhandler:
     def __init__(self):
