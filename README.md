@@ -34,6 +34,7 @@ waitform-pipe
 - 기타 라이브러리는 `requirements.txt`를 참고해주세요.
 
 ## Environment Setting
+`pip list --format=freeze > requirements.txt`  
 아래 중 익숙한 방식으로 환경으로 구성하세요.  
 1. Conda
 - `requirements.yaml` 파일로 가상환경과 라이브러리를 함께 설치합니다.
