@@ -10,10 +10,10 @@ class chromedriver(ABC):
 
     # 생성자
     def __init__(self, debug=False):
-        path = chromedriver_autoinstaller.install()         # 크롬 드라이버 설치 및 경로 반환
-        options = webdriver.ChromeOptions()                 # 크롬 옵션 추가
-        if not debug:                                       # 디버그 수행시 창 띄워서 진행
-            options.add_argument("headless")                # 백그라운드 실행
+        path = chromedriver_autoinstaller.install()  # 크롬 드라이버 설치 및 경로 반환
+        options = webdriver.ChromeOptions()          # 크롬 옵션 추가
+        if not debug:                                # 디버그 수행시 창 띄워서 진행
+            options.add_argument("headless")         # 백그라운드 실행
         self.driver = webdriver.Chrome(
             service=Service(path), chrome_options=options)  # 크롬 브라우저 사용하기
         self.link_col = ['position', 'link', 'visited']     # 링크 데이터 열 정보
@@ -25,7 +25,7 @@ class chromedriver(ABC):
     @classmethod
     def getdata(self):
         pass
-    
+
     # 추상 메소드
     @classmethod
     def getlink(self):
@@ -41,7 +41,7 @@ class chromedriver(ABC):
     # 링크 데이터 열 정보 반환
     def getlinkcol(self):
         return self.link_col
-    
+
     # 공고문 데이터 열 정보 반환
     def getdatacol(self):
         return self.data_col

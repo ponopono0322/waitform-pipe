@@ -9,7 +9,8 @@ def main():
     cvhd = CSVhandler()
 
     # wanted 사이트
-    url = "https://www.wanted.co.kr/wdlist/518?country=kr&job_sort=company.response_rate_order&years=-1&locations=all"
+    url = "https://www.wanted.co.kr/wdlist/518?country=kr&\
+        job_sort=company.response_rate_order&years=-1&locations=all"
     c_wanted = Wanted(url, False)        # 새 객체 생성
     crawling(cvhd, c_wanted, link_path, data_path)
 
@@ -28,7 +29,7 @@ def crawling(cvhd, c_class, link_path, data_path, save_ops=False):
     cl_tmp = c_class.getlink()                         # 링크 데이터 크롤링
     if save_ops:                                       # 별도 저장 옵션을 사용한 경우
         cvhd.exporttocsv(link_path, cl_tmp, 'link')
-    cl_new = cvhd.searchnewdata(link_path, cl_tmp, 'link') # 새 데이터 찾기
+    cl_new = cvhd.searchnewdata(link_path, cl_tmp, 'link')  # 새 데이터 찾기
     c_class.datacheck(cl_new, type='link')             # 새 데이터 적용
     c_tmp = c_class.getdata()                          # 공고문 데이터
 
@@ -41,6 +42,7 @@ def crawling(cvhd, c_class, link_path, data_path, save_ops=False):
 
     c_class.close()
     c_class.quit()     # 크롬 드라이버 종료
+
 
 if __name__ == '__main__':
     main()
