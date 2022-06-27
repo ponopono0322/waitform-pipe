@@ -51,7 +51,6 @@ class Wanted(chromedriver):
 
             time.sleep(1)
             self.scroll(c_name)     # 스크롤 함수 실행
-            break
         return self.linkdf
 
     # 스크롤을 통한 데이터 수집
