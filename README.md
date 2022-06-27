@@ -5,8 +5,18 @@
 ## Directory Info
 ```bash
 waitform-pipe
-├── Crwaling        # crawling folder
-│   └── *.py        # crawling code
+├── Crwaling                # crawling folder
+│   ├── data                # data folder
+│   │   ├── data.zip        # post data
+│   │   └── data.zip        # link data
+│   ├── ChromeDriver.py     # chromedriver handler
+│   ├── crawling_incruit.py # site::incruit crawling code
+│   ├── crawling_wanted.py  # site::wanted crawling code
+│   ├── crawling_linkedin.py    # site::linkedin crawling code    ⎫
+│   ├── crawling_programmers.py # site::programmers crawling code ⎬ support by @tpqls0327
+│   ├── crawling_saramin.py     # site::saramin crawling code     ⎭
+│   ├── CSVhandler.py       # csv file handler
+│   └── run.py              # start file
 │
 ├── Models          # deep-learning model folder
 │   └── *.py        # crawling code
