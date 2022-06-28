@@ -17,6 +17,59 @@
 |Game |게임 |게임개발 |모바일 게임, 게임 클라이언트, 게임서버 |VR엔지니어 |
 |AI |인공지능/빅데이터 |빅데이터분석가, 데이터개발, 데이터마이닝, 시각화, 딥러닝, 머신러닝, 빅데이터 |머신러닝, 인공지능(AI) |머신러닝 엔지니어, 데이터 사이언티스트, 빅데이터 엔지니어, BI 엔지니어 |
 
+## Directory Guide
+현재 이 폴더 구조는 다음과 같습니다.
+```bash
+waitform-pipe
+├── Crwaling                    # crawling folder
+│   ├── data                    # 크롤링 데이터 폴더
+│   │   ├── data.zip            # 공고문 데이터(csv) 압축 파일
+│   │   └── link.zip            # 링크 데이터(csv) 압축 파일
+│   │
+│   ├── ChromeDriver.py         # 셀레니움 크롬드라이버 실행관련 클래스
+│   ├── crawling_incruit.py     # 인크루트 크롤러
+│   ├── crawling_wanted.py      # 원티드 크롤러
+│   ├── crawling_linkedin.py    # 링크드인 크롤러
+│   ├── crawling_programmers.py # 프로그래머스 크롤러
+│   ├── crawling_saramin.py     # 사람인 크롤러
+│   ├── CSVhandler.py           # csv 파일 관리
+│   └── run.py                  # 시작 파일
+:   :
+```
+
+## Requirements
+위 파일을 실행하기 위한 필요 라이브러리입니다. 다음 명령어 실행하거나 버전을 확인하세요.
+```bash
+pip install -r Crawling/requirements.txt
+```
+- numpy==1.23.0
+- pandas==1.4.3
+- selenium==4.3.0
+- beautifulsoup4==4.11.1
+- chromedriver-autoinstaller==0.3.1
+
+## Take a look..
+csv 파일의 행은 다음과 같이 구성되어 있습니다.
+- data.csv
+  - `position`, `data`, `visited`
+  - `position`: column name 중 하나입니다.
+  - `data`    : 공고문 본문 데이터입니다.
+  - `visited` : 이 데이터를 학습 데이터로 사용했는지 값('T'/'F', type=str)입니다. 
+- link.csv
+  - `position`,`link`, `visited`
+  - `position`: column name 중 하나입니다.
+  - `link`    : 링크 본문 데이터입니다.
+  - `visited` : 이 데이터로 공고문 본 데이터를 크롤링 사용했는지 값('T'/'F', type=str)입니다. 
+
+## Notice
+본 가이드는 한글 본문 데이터 크롤링을 다룹니다. [부모 프로젝트](https://github.com/ALGO-LEARN/waitForm)에서 사용한 데이터(영문)와는 다릅니다.  
+만약 영문 데이터(링크드인)를 크롤링하려면 다음 명령어를 통해 `crawling_linkedin.py`를 실행하거나
+```bash
+python Crawling/crawling_linkedin.py
+```
+이 [데이터](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)를 다운받으세요.
+
+
 ## Crawling Example
 - 다음과 같은 명령어를 통해 전체 사이트에 대한 크롤링을 수행할 수 있습니다.
   ```bash
@@ -38,27 +91,3 @@
     # 4. 다음 경로에서 확인하세요
     waitform-pipe/Crawling/data/[filename].csv
     ```
-
-## For Convenience..
-편의를 위해 본문 데이터를 [여기]()에서 다운받아 사용할 수 있습니다. 파일 구조는 다음과 같이 구성합니다.
-```bash
-waitform-pipe
-├── Crwaling            # crawling folder
-│   ├── data
-│   │   ├── [link_filename].csv
-│   │   └── [data_filename].csv
-│   │
-│   └── *.py            # crawling codes
-:   :                   # 기존 파일들..
-```
-
-## Requirements
-위 파일을 실행하기 위한 필요 라이브러리입니다. 다음 명령어를 실행하세요.
-```bash
-pip install -r Crawling/requirements.txt
-```
-- numpy==1.23.0
-- pandas==1.4.3
-- selenium==4.3.0
-- beautifulsoup4==4.11.1
-- chromedriver-autoinstaller==0.3.1
