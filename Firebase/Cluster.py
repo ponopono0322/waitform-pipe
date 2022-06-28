@@ -20,7 +20,7 @@ class Cluster:
         # 아직 연동한 프로젝트가 없다면
         if not firebase_admin._apps:
             # 서비스 키를 사용해서 연동
-            cred = credentials.Certificate("./path/to/serviceAccountKey.json")
+            cred = credentials.Certificate("./data/serviceAccountKey.json")
             firebase_admin.initialize_app(cred, {   # 프로젝트 초기화
                 'projectId': pj_name                # 프로젝트 명에 따라 적용
             })
