@@ -4,7 +4,6 @@
 ## Directory Info
 ```bash
 waitform-pipe
-:   :
 ├── Firebase    # 파이어베이스 연동과 클러스터링 폴더
 │   ├── data    # this directory is not include on github
 │   │   ├── bert_classifi_model.pt  # pytorch model
@@ -14,6 +13,9 @@ waitform-pipe
 │   ├── requirements.txt    # requirements.txt
 │   └── README.md           # crawling guide
 :   :
+├── Models      # 이 문서에서 사용되는 파일이 있기 때문에 포함됩니다
+    └── data    # this directory is not include on github
+        └── coda_data.csv   # 링크드인 크롤링 데이터입니다.
 ```
 
 ## Firebase 설정
@@ -46,7 +48,8 @@ waitform-pipe
 편의를 위해서 파일을 제공합니다. [여기](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)에서 압축 파일(1.04GB)을 다운 받으세요.  
 다운 받은 파일을 압축 해제한 후(1.3GB) 위의 경로 가이드와 같은 장소로 파일을 옮기세요.  
 
-만약 모델을 처음부터 구성하려면 상위 폴더의 [Models]()를 참고하세요
+만약 모델을 처음부터 구성하려면 상위 폴더의 [Models]()를 참고하세요.  
+추가적으로, 아래 작업 중에서 크롤링 데이터셋을 사용합니다. [여기](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)에서 압축 파일을 받아 압축해제 후 `Model/data/` 폴더 아래에 넣습니다.
 
 ## Requirements
 이 모듈에서 사용하는 라이브러리를 설치하려면 다음 명령어를 실행하거나 리스트를 참고하세요.
@@ -65,6 +68,11 @@ pip install --upgrade firebase-admin
 ```
 
 ## Guide
+먼저 실행해보려면 아래 명령어를 사용하세요.
+```bash
+python Firebase/run.py
+```  
+
 1. 먼저 firebase와 연결되는지 확인해봅니다.
    ```python
    from Cluster import Cluster       # Cluster 클래스를 사용할 예정입니다
@@ -78,11 +86,11 @@ pip install --upgrade firebase-admin
    ```   
 2. 정상적으로 연동이 되었다면 학습된 모델을 불러오고 결과를 뽑습니다.
    본 작업을 수행하기 전에 먼저 임의로 저장했던 데이터를 수정합니다. 이 데이터는 [APEX Systems](https://www.apexsystems.com/job/1265196_usa/sql-database-administrator?catalogcode=USA&address=&radius=50&page=43&rows=25&query=%2A&remote=)의 데이터베이스 전문가 채용 공고문 중 일부입니다. 이 데이터를 `board` > `1` > `content`에 넣습니다.
-   - before
+   - Before
    ```
    something string
    ```
-   - after
+   - After
    ```
    Our client is seeking a SQL Server Database Administrator. The SQL DBA performs advanced implementation/support for systems application and monitoring; is responsible for installing, configuring, and maintaining operating system workstations and servers, including web servers in support of business processing requirements; performs software installations and upgrades to operating systems and layered software packages; schedules installations and upgrades and maintains them in accordance with established IT policies and procedures; monitors and tunes the system to achieve optimum performance; develops and promotes standard operating procedures; conducts routine hardware and software audits of server to ensure compliance with established standards policies and configuration guidelines; develops and maintains comprehensive operating system hardware and software configuration database/library of all supporting documentation; provides integrated team support and maintenance of Technical Services hardware and software; provides design and implementation support for server hardware Microsoft Windows operating systems virtualization Active Directory Group Policy TCP/IP/DHCP/DNS IIS SQL Exchange, Clustering, Load Balancing, SAN/NAS and advanced support.
 
@@ -99,15 +107,17 @@ pip install --upgrade firebase-admin
    3 years of relevant experience with Microsoft SQL Server and Microsoft Windows Server (versions 2012/2016/2017/2019 for both).
    Must be available to be on-site in Charlottesville, Virginia. Relocation reimbursement may be provided for the right candidate.
    ```  
+   그런 다음 아래 스크립트를 실행합니다.
    ```python
    # 본 작업을 수행하기 전에 BOARD/1/content의 값을 바꿨는지 꼭 확인하세요.
+   from BertClassification import BertClassification
    b_class = BertClassification()  # 학습된 모델 불러오기
    b_class.loader()                # 모델 준비
    sample = b_class.evaluate(sen)  # 모델 결과 뽑기
    print("모델 학습 결과:", sample)
    # 모델 학습 결과: [0.00345398 0.00345398 0.01032064 0.9612105 0.00398431 0.00345398 0.00376071 0.00345398 0.00345398 0.00345398]
    ```  
-   4번째 값이 매우 높게 나온 것을 알 수 있습니다. 사전에 설정했던 인덱스 정보는 다음과 같습니다.
+   결과를 알아보기 이전에 사전에 설정했던 인덱스 정보를 확인해봅시다.
    ```python
    labels = {  # 인덱스 설정
     'backend%20developer': 0,
@@ -122,8 +132,9 @@ pip install --upgrade firebase-admin
     'AI%20Engineer': 9
    }
    ```  
-   따라서 4번째 인덱스는 `database`이며 우리가 사전에 넣은 데이터를 잘 분류했음을 알 수 있습니다. 이제 이 결과를 이용해서 클러스터링을 시도하겠습니다.
+   앞서 구한 결과값 중 가장 높은 값은 4번째였습니다. 위의 인덱스 정보에서 알 수 있듯 4번째 인덱스는 `database`이며 우리가 사전에 넣은 데이터를 잘 분류했음을 알 수 있습니다. 이제 이 결과를 이용해서 클러스터링을 시도하겠습니다.
 3. 먼저 클러스터링을 하기 전에 가짜 사용자를 만들겠습니다.
+   이 작업은 기존의 데이터셋으로부터 학습되기 때문에 오래 걸립니다(1H+).
    ```python
    import os
    model_path = os.getcwd() + "/Firebase/data/bert_classifi_model.pt"
@@ -145,3 +156,45 @@ pip install --upgrade firebase-admin
    ```
 5. 잘 골라냈는지 값을 파이어베이스에서 찾아보겠습니다.
    ![result](../images/result.jpg)
+   성공적입니다! 위 결과는 사용자마다 다를 수 있지만, 대체적으로 좋은 결과를 얻을 것입니다.
+6. 위의 전체 코드는 다음과 같습니다.
+   ```python
+   from Cluster import Cluster  # 클러스터링 모듈 불러오기
+   from BertClassification import BertClassification    # 학습 및 연동 모듈 불러오기
+   import numpy as np
+   import os
+   
+   def main():
+    # TODO: 아래에서 API에서 받아오는 함수 필요!
+    board_idx = '1'             # API로부터 얻었던 board pk 값
+    pj_name = 'waitform-sample' # 파이어베이스 프로젝트 이름
+    cus = Cluster(board_idx)    # 필요 데이터 넣기
+    cus.connect(pj_name)        # firebase 연결
+    sen, member_idx = cus.getboard()    # 게시물 값 가져오기
+    
+    model_path = os.getcwd() + "/Firebase/data/bert_classifi_model.pt"
+    data_path = os.getcwd() + "/Models/data/code_data.csv"
+    csv_name = os.getcwd() + "/Firebase/data/conv.csv"
+    cus.csvdbmaker(model_path, data_path, csv_name)
+    cus.checker(csv_name)
+
+    b_class = BertClassification()  # 학습된 모델 불러오기
+    b_class.loader()                # 모델 준비
+    sample = b_class.evaluate(sen)  # 모델 결과 뽑기
+
+    merged_sample = np.append(sample, np.array([member_idx]))
+    cus.getmembers(merged_sample)   # 클러스터링을 위한 모든 데이터 가져오기(클래스 내부적으로 저장됨)
+
+    # TODO: 아래에서 API를 호출해서 보내주는 작업 필요!
+    members = cus.sortby(sample, 5)    # 클러스터링 새 버전, 상위 n개 추출
+
+    print("클러스터링 결과:", members)     # 클러스터링 결과: [192 191 183 162 198]
+    
+    if __name__ == '__main__':
+        main()
+
+   ```  
+   이 코드는 `run.py` 파일에서도 확인 할 수 있습니다.
+
+## Function Guide
+앞서 사용한 함수들과 직접적으로 사용하진 않았지만 내부에 정의되었던 함수들에 대한 정보입니다.
