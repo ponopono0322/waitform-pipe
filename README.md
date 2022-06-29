@@ -16,13 +16,18 @@ waitform-pipe
 │   ├── crawling_programmers.py # site::programmers crawling code ⎬ support by @tpqls0327
 │   ├── crawling_saramin.py     # site::saramin crawling code     ⎭
 │   ├── CSVhandler.py       # csv file handler
-│   └── run.py              # start file
+│   ├── run.py              # start file
+│   ├── requirements.txt    # requirements.txt
+│   └── README.md           # crawling guide
 │
 ├── Models          # deep-learning model folder
 │   └── *.py        # crawling code
 │
-├── Workflow        # framework image folder
-│   └── *.png       # used in readme.md
+├── Firebase        # linking Cloud Firestore & model clustering folder
+│   ├── Cluster.py  # init firebase and clustering code
+│   ├── BertClassification.py   # reasoning model code
+│   ├── requirements.txt    # requirements.txt
+│   └── README.md   # firebase the guide
 │
 ├── .gitignore      # gitignore
 └── README.md       # readme
@@ -30,8 +35,7 @@ waitform-pipe
 
 ## Prerequisites
 - python 3.8
-- pytorch 1.11
-- 기타 라이브러리는 `requirements.txt`를 참고해주세요.
+- 각 모듈별 필요 라이브러리는 각 폴더에 있는 `requirements.txt`를 참고해주세요.
 
 ## Environment Setting
 `pip list --format=freeze > requirements.txt`  

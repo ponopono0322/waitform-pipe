@@ -3,6 +3,7 @@
 *__MACOSX
 
 # drop data folder
+Models/data/
 Firebase/data/
 # Crawling/data/
 
