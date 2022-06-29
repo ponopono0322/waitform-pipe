@@ -68,7 +68,7 @@ pip install --upgrade firebase-admin
 ```
 
 ## Guide
-먼저 실행해보려면 아래 명령어를 사용하세요.
+가이드를 따르기 전에 우선 파일을 실행해보려면 아래 명령어를 사용하세요.
 ```bash
 python Firebase/run.py
 ```  
@@ -134,7 +134,7 @@ python Firebase/run.py
    ```  
    앞서 구한 결과값 중 가장 높은 값은 4번째였습니다. 위의 인덱스 정보에서 알 수 있듯 4번째 인덱스는 `database`이며 우리가 사전에 넣은 데이터를 잘 분류했음을 알 수 있습니다. 이제 이 결과를 이용해서 클러스터링을 시도하겠습니다.
 3. 먼저 클러스터링을 하기 전에 가짜 사용자를 만들겠습니다.
-   이 작업은 기존의 데이터셋으로부터 학습되기 때문에 오래 걸립니다(1H+).
+   이 작업은 기존의 데이터셋으로부터 학습되기 때문에 오래 걸립니다(1h+).
    ```python
    import os
    model_path = os.getcwd() + "/Firebase/data/bert_classifi_model.pt"
