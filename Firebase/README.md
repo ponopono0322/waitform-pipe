@@ -155,7 +155,7 @@ python Firebase/run.py
    print("클러스터링 결과:", members)     # 클러스터링 결과: [192 191 183 162 198]
    ```
 5. 잘 골라냈는지 값을 파이어베이스에서 찾아보겠습니다.
-   ![result](../images/result.jpg)
+   ![result](../images/sample_result.jpg)
    성공적입니다! 위 결과는 사용자마다 다를 수 있지만, 대체적으로 좋은 결과를 얻을 것입니다.
 6. 위의 전체 코드는 다음과 같습니다.
    ```python
