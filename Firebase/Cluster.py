@@ -3,6 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 import pandas as pd
 import numpy as np
+import os
 
 
 class Cluster:
@@ -20,7 +21,8 @@ class Cluster:
         # 아직 연동한 프로젝트가 없다면
         if not firebase_admin._apps:
             # 서비스 키를 사용해서 연동
-            cred = credentials.Certificate("./data/serviceAccountKey.json")
+            path = os.getcwd()+"/Firebase/data/serviceAccountKey.json"
+            cred = credentials.Certificate(path)
             firebase_admin.initialize_app(cred, {   # 프로젝트 초기화
                 'projectId': pj_name                # 프로젝트 명에 따라 적용
             })
@@ -88,8 +90,8 @@ class Cluster:
             data.document(u"%d" % (i + 1)).set(j)       # 데이터 저장
 
     # 500개의 가짜 데이터 생성
-    def checker(self):
-        df = pd.read_csv("conv2.csv", encoding='utf-8')  # 파일 읽어오기
+    def checker(self, csv_name="conv.csv"):
+        df = pd.read_csv(csv_name, encoding='utf-8')  # 파일 읽어오기
         cov_df = pd.DataFrame(columns=['c0', 'c1', 'c2', 'c3', 'c4', 'c5',
                                        'c6', 'c7', 'c8', 'c9', 'category'])
         for i in df.category.unique():                    # 10개의 컬럼 값
@@ -151,7 +153,7 @@ class Cluster:
             print("Failed: member data update")  # 갱신 오류임을 알림
 
     # 실제 사용한 학습 데이터로 softmax값을 뽑는 함수
-    def csvdbmaker(self, model_path, data_path, csv_name="conv2.csv"):
+    def csvdbmaker(self, model_path, data_path, csv_name="conv.csv"):
         from BertClassification import BertClassification
         b_class = BertClassification(model_path)
         b_class.loader()    # 테스트하는 것과 같게

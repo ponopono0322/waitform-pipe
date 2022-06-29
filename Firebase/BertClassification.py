@@ -7,6 +7,7 @@ from transformers import BertModel
 from transformers import BertTokenizer
 
 import numpy as np
+import os
 
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')    # bert base model 사용
@@ -80,8 +81,9 @@ class BertClassifier(nn.Module):
 
 class BertClassification:
 
-    def __init__(self, model_path):
+    def __init__(self):
         self.model = BertClassifier()
+        model_path = os.getcwd()+"/Firebase/data/bert_classifi_model.pt"
         self.checkpoint = torch.load(model_path, map_location=torch.device('cpu'))
         self.optimizer = Adam(BertClassifier().parameters(), lr=1e-6)  # init optimizer
 
