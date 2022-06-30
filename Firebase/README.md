@@ -198,3 +198,163 @@ python Firebase/run.py
 
 ## Function Guide
 앞서 사용한 함수들과 직접적으로 사용하진 않았지만 내부에 정의되었던 함수들에 대한 정보입니다.
+### BertClassification
+- `__init__()`
+  클래스 생성자입니다.  
+  - *parameters*  
+    필요한 파라미터가 없는 함수입니다.  
+  - *output*  
+    반환값이 없습니다.  
+  ```python
+  b_class = BertClassification()
+  ```
+- `loader()`
+  pytorch 체크포인트로부터 데이터를 불러오는 작업을 수행합니다.  
+  - *parameters*  
+    필요한 파라미터가 없는 함수입니다.  
+  - *output*  
+    반환값이 없습니다.  
+  ```python
+  b_class.loader()
+  ```
+- `evaluate(sentence)`
+  문장을 분류하는 작업을 수행하는 함수입니다.  
+  - *parameters*  
+    sentence: *필수로 입력해야하는 변수, type=str*  
+  - *output*  
+    type=list, size=10  
+  ```python
+  b_class.evaluate(sen)
+  ```
+
+### Cluster
+- `__init__(board_idx)`  
+  클래스 생성자입니다.  
+  - *parameters*  
+    board_idx: *필수로 입력해야하는 변수, type=str*   
+  - *output*   
+    반환값이 없습니다.  
+  ```python
+  board_idx = '1'
+  cus = Cluster(board_idx)
+  ```
+- `connect(pj_name)`
+  파이어베이스 연동하는 함수입니다.  
+  - *parameters*   
+    pj_name: *필수로 입력해야하는 변수, type=str*  
+  - *output*  
+    반환값이 없습니다.  
+  ```python
+  pj_name = 'waitform-sample'
+  cus.connect(pj_name)
+  ```  
+- `getboard()`  
+  파이어베이스에서 게시물 데이터를 가져오는 함수입니다.  
+  - *parameters*   
+    필요한 파라미터가 없는 함수입니다.  
+  - *output*  
+    type: (type=str, type=str), type=tuple   
+    만약 데이터를 찾지 못하거나 다른 오류라면 (None, None)이 반환됩니다.  
+  ```python
+  sen, member_idx = cus.getboard()
+  ```  
+- `getmembers(class_arr)`  
+  파이어베이스에서 모든 사용자 데이터를 가져오는 함수입니다.
+  - *parameters*   
+    class_arr: *필수로 입력해야하는 변수, type=np.array, size=11*
+  - *output*  
+    type: (type=str, type=str), type=tuple   
+    만약 데이터를 찾지 못하거나 다른 오류라면 "no connection!"이 반환됩니다.  
+  ```python
+  import numpy as np
+  merged_sample = np.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 1])
+  cus.getmembers(merged_sample)
+  ```  
+- `creator(n=1000)`: **deprecated function**  
+  파이어베이스에 가짜 사용자를 만들어내는 함수입니다.  
+  - *parameters*   
+    n: *기본값 1000, type=int*
+  - *output*  
+    반환값이 없습니다.  
+  ```python
+  cus.creator(n=500)
+  ```  
+- `creatorbycsv(df)`  
+  데이터프레임으로부터 가짜 사용자를 파이어베이스에 저장 함수입니다.  
+  - *parameters*   
+    df: *필수로 입력해야하는 변수, type=dataframe*
+  - *output*  
+    반환값이 없습니다.  
+   ```python
+   import pandas as pd
+   column = ['c0', 'c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7', 'c8', 'c9', 'id']
+   df = pd.DataFrame(columns=column)
+   cus.creatorbycsv(df=df)
+   ```  
+- `checker(csv_name="conv.csv")`  
+  csv 파일로부터 가짜 사용자를 만들어내는 함수입니다.  
+  - *parameters*   
+    csv_name: *기본값 conv.csv, type=str*
+  - *output*  
+    반환값이 없습니다.  
+   ```python
+   csv_name = "[your_csv_name.csv]"
+   cus.checker(csv_name)
+   ```
+- `clear(n=1000)`  
+  파이어베이스의 사용자의 모든 데이터를 삭제하는 함수입니다.  
+  - *parameters*   
+    n: *기본값 1000, type=int*  
+  - *output*  
+    반환값이 없습니다.  
+   ```python
+   cus.clear(n=500)
+   ```
+- `cluster(k=10, max_return=5)`: **deprecated**  
+  모든 사용자를 k개 집합으로 클러스터링하는 함수입니다.  
+  - *parameters*   
+    k: *기본값 10, type=int*  
+    max_return: *기본값 5, type=int*  
+  - *output*  
+    type=list, length=max_return
+   ```python
+   cus.cluster(k=10, max_return=10)
+   ```  
+- `sortby(m_result, n)`  
+  모델로 얻을 결과를 기반으로 가장 유사한 상위 n개 유저 id를 출력하는 함수입니다.
+  - *parameters*   
+    m_result: *필수로 입력해야하는 변수, type=np.array, size=10*  
+    n: *필수로 입력해야하는 변수, type=int*  
+  - *output*  
+    type=list, length=n
+   ```python
+   m_result = np.array([0.00345398, 0.00345398, 0.01032064, 0.9612105, 0.00398431, 0.00345398, 0.00376071, 0.00345398, 0.00345398, 0.00345398])
+   cus.sortby(m_result=m_result, n=5)
+   ```  
+- `update(member_idx, class_arr)`  
+  사용자 1명의 데이터를 갱신하는 함수입니다.
+  - *parameters*   
+    member_idx: *필수로 입력해야하는 변수, type=str*  
+    class_arr: *필수로 입력해야하는 변수, type=np.array, size=10*  
+  - *output*  
+    실패시 Failed: member data update를 반환합니다. 성공시에는 아무런 response가 없습니다.  
+   ```python
+   member_idx = '1'
+   class_arr = np.array([0.00345398, 0.00345398, 0.01032064, 0.9612105, 0.00398431, 0.00345398, 0.00376071, 0.00345398, 0.00345398, 0.00345398])
+   cus.update(member_idx=member_idx, class_arr=class_arr)
+   ```  
+- `csvdbmaker(model_path, data_path, csv_name="conv.csv")`  
+  가짜 사용자를 만들어 csv 파일로 저장하는 함수입니다.
+  - *parameters*   
+    model_path: *필수로 입력해야하는 변수, type=str, 파이토치 모델 경로가 입력되어야 합니다*  
+    data_path: *필수로 입력해야하는 변수, type=str, 데이터셋 경로가 입력되어야 합니다*  
+    csv_name: *기본값 conv.csv, type=str*
+  - *output*  
+    반환값이 없습니다.  
+   ```python
+   import os
+   model_path = os.getcwd() + "/Firebase/data/bert_classifi_model.pt"
+   data_path = os.getcwd() + "/Models/data/code_data.csv"
+   csv_name = os.getcwd() + "/Firebase/data/conv.csv"
+   cus.csvdbmaker(model_path=model_path, data_path=data_path, csv_name=csv_name)
+   ```  
