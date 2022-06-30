@@ -1,5 +1,14 @@
 # Firebase settings and builds guide
 파이어베이스 설정과 함께 메소드 사용법을 안내합니다.
+## Contents
+1. [Directory Info](#directory-info)  
+2. [Firebase 설정](#firebase-설정)  
+3. [Model](#model)
+4. [Requirements](#requirements)
+5. [Guide](#guide)
+6. [Function Guide](#function-guide)  
+   1. [BertClassification](#bertclassification)
+   2. [Cluster](#cluster)
 
 ## Directory Info
 ```bash
