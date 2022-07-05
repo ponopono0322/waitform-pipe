@@ -8,7 +8,7 @@ waitform-pipe
 ├── Crwaling                # crawling folder
 │   ├── data                # data folder
 │   │   ├── data.zip        # post data
-│   │   └── data.zip        # link data
+│   │   └── link.zip        # link data
 │   ├── ChromeDriver.py     # chromedriver handler
 │   ├── crawling_incruit.py # site::incruit crawling code
 │   ├── crawling_wanted.py  # site::wanted crawling code
@@ -20,8 +20,9 @@ waitform-pipe
 │   ├── requirements.txt    # requirements.txt
 │   └── README.md           # crawling guide
 │
-├── Models          # deep-learning model folder
-│   └── *.py        # crawling code
+├── Models                  # deep-learning model folder
+│   ├── BertTextClassification.py   # pytorch bert classification model
+│   └── functions.py        # training, evaluate, test functions
 │
 ├── Firebase        # linking Cloud Firestore & model clustering folder
 │   ├── Cluster.py  # init firebase and clustering code
@@ -36,6 +37,12 @@ waitform-pipe
 ├── .gitignore      # gitignore
 └── README.md       # readme
 ```
+
+- 데이터 수집에 관한 내용은 `Crawling` 폴더를,
+- 모델 학습에 관한 내용은 `Models` 폴더를,
+- 데이터베이스와 연동하여 추론하는 과정은 `Firebase` 폴더를,
+- 앞의 과정을 파이프라인화 하는 RestAPI는 `API` 폴더를 _이 폴더는 아직 미완성입니다_
+참고해주세요
 
 ## Prerequisites
 - python 3.8
