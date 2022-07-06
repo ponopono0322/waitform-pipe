@@ -36,7 +36,7 @@ python Models/run.py --mode "eval"
 `class_type`에 대한 정보는 아래를 참고하세요.  
 
 ```bash
-python Models/run.py --mode --class_type [int] --sentence [str]
+python Models/run.py --mode "test" --class_type [int] --sentence [str]
 ```
 
 ```bash
