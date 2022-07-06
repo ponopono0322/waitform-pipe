@@ -57,7 +57,7 @@ waitform-pipe
 편의를 위해서 파일을 제공합니다. [여기](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)에서 압축 파일(1.04GB)을 다운 받으세요.  
 다운 받은 파일을 압축 해제한 후(1.3GB) 위의 경로 가이드와 같은 장소로 파일을 옮기세요.  
 
-만약 모델을 처음부터 구성하려면 상위 폴더의 [Models]()를 참고하세요.  
+만약 모델을 처음부터 구성하려면 상위 폴더의 [Models](https://github.com/ponopono0322/waitform-pipe/tree/main/Models)를 참고하세요.  
 추가적으로, 아래 작업 중에서 크롤링 데이터셋을 사용합니다. [여기](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)에서 압축 파일을 받아 압축해제 후 `Model/data/` 폴더 아래에 넣습니다.
 
 ## Requirements
