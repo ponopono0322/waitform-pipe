@@ -6,7 +6,7 @@
 waitform-pipe
 ├── Models
 │   ├── data                # 데이터셋 폴더(이 폴더는 업로드되지 않습니다)
-│   │   ├── data
+│   │   ├── bert_classifi_model.pt  # 모델 세이브 파일
 │   │   └── code_data.csv   # 링크드인 크롤링 데이터(영문)
 │   ├── BertTextClassification.py   # BERT를 사용한 분류 모델
 │   └── functions.py        # 데이터처리, 학습, 검증, 테스트를 돕는 클래스
@@ -20,13 +20,13 @@ waitform-pipe
 _OR Google Colab GPU mode_
 
 ## Train
-모델을 처음부터 학습할 경우 `[int]` 대신에 epoch 수를 입력하세요  
+모델을 처음부터 학습할 경우 `[int]` 대신에 epoch 수를 입력하세요(default 값은 20입니다)  
 ```bash
 python Models/run.py --mode "train" --epoch [int]
 ```
 
 ## Evaluate
-데이터셋의 평가를 진행할 경우는 아래와 같이 진행하세요
+데이터셋의 평가를 진행할 경우는 아래와 같이 진행하세요  
 ```bash
 python Models/run.py --mode "eval"
 ```
@@ -59,3 +59,9 @@ class_arr = {
 python Models/run.py -h
 ```
 
+## Download In-house model
+If you want to use our in-house model, can download zip file in [here](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)(1.04GB)  
+Also, csv file download in [here](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)
+
+## Test
+_This will update soon_
