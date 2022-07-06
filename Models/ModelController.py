@@ -1,25 +1,17 @@
-import pandas as pd
 import numpy as np
 import os
 import torch
 
-from transformers import BertTokenizer
-from BertTextClassification import BertClassifier, train, evaluate
+from BertTextClassification import BertClassifier, train, evaluate, getdf
 
+class ModelControl:
 
-class DataControl:
     def __init__(self, path):
-        self.df = pd.read_csv(path).dropna().drop_duplicates(ignore_index=True)
+        self.df = getdf(path)
+        self.model = None
         self.df_train = None
         self.df_val = None
         self.df_test = None
-        self.model = None
-
-    def getlabel(self):
-        return {j:i for i, j in enumerate(self.df.category.unique())}
-
-    def gettoken(self):
-        return BertTokenizer.from_pretrained('bert-base-cased')
 
     def getdataset(self):
         np.random.seed(112)
@@ -65,5 +57,5 @@ class DataControl:
             self.model.eval()
         else:
             return f"Couldn't find model {model_path}"
-
+        
         evaluate(self.model, df_test)
