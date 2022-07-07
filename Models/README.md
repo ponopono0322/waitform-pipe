@@ -16,7 +16,7 @@ waitform-pipe
 ## Spec
 - Ubuntu 20.04
 - Nvidia GTX 1080ti (CUDA 10.2)
-- 32GB DRAM
+- 32GB DRAM  
 _OR Google Colab GPU mode_
 
 ## Train
@@ -60,10 +60,10 @@ python Models/run.py -h
 ```
 
 ## Download In-house model
-If you want to use our in-house model, can download pt zip file in [here](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)(1.04GB)  
-Also, csv zip file download in [here](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)(7.1MB)
+If you want to use our in-house model, can download .pt zip file in [here](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)(1.04GB)  
+Also, .csv zip file download in [here](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)(7.1MB)
 
-## Test
+## Result
 - Train  
 
 |Accuracy|Loss|
