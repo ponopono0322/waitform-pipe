@@ -3,7 +3,15 @@
 전체 프로세스에 대한 정보는 위의 링크를 참고하세요.  
 
 ## Quick Start
-
+_Note: silicon mac의 경우 cuda를 사용할 수 없으므로 dockerfile의 FROM을 `pytorch`에서 `python:3.8`으로 수정하세요_
+- 이미지를 생성합니다
+  ```bash
+  docker build -t waitform-pipe .
+  ```
+- 컨테이너를 생성 및 실행합니다
+  ```bash
+  docker run -p 8080:80 --name waitfrom waitform-pipe
+  ```
 
 ## Directory Info
 ```bash
@@ -42,8 +50,8 @@ waitform-pipe
 ```
 
 - 데이터 수집에 관한 내용은 [Crawling](./Crawling/) 폴더를,
-- 모델 학습에 관한 내용은 `Models` 폴더를,
-- 데이터베이스와 연동하여 추론하는 과정은 `Firebase` 폴더를,
+- 모델 학습에 관한 내용은 [Models](./Models/) 폴더를,
+- 데이터베이스와 연동하여 추론하는 과정은 [Firebase](./Firebase/) 폴더를,
 - 앞의 과정을 파이프라인화 하는 RestAPI는 `API` 폴더를 _이 폴더는 아직 미완성입니다_  
 참고해주세요
 
@@ -78,16 +86,5 @@ waitform-pipe
 - `requirements.txt` 파일로 필요 라이브러리를 설치합니다.
   ```bash
   pip install -r requirements.txt
-  ```
-
-3. Docker
-_Note: silicon mac의 경우 cuda를 사용할 수 없으므로 dockerfile의 FROM을 `pytorch`에서 `python:3.8`으로 수정하세요_
-- 이미지를 생성합니다
-  ```bash
-  docker build -t waitform-pipe .
-  ```
-- 컨테이너를 생성 및 백그라운드 실행합니다
-  ```bash
-  docker run -dp 8080:80 --name waitfrom waitform-pipe
   ```
 
