@@ -66,9 +66,13 @@ Also, csv zip file download in [here](https://drive.google.com/file/d/1znx3eplfH
 ## Test
 - Train  
 
-<img src="../images/train_acc.svg" width="450" /> <img src="../images/train_loss.svg" width="450" />
+|Accuracy|Loss|
+|:------:|:--:|
+|<img src="../images/train_acc.svg" width="450" />|<img src="../images/train_loss.svg" width="450" />|
 
 - Validation
 
-<img src="../images/val_acc.svg" width="450" /> <img src="../images/val_loss.svg" width="450" />
+|Accuracy|Loss|
+|:------:|:--:|
+|<img src="../images/val_acc.svg" width="450" />|<img src="../images/val_loss.svg" width="450" />|
 
