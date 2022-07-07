@@ -66,9 +66,7 @@ Also, csv zip file download in [here](https://drive.google.com/file/d/1znx3eplfH
 ## Test
 - Train  
 
-acc|loss
-:-:|:-:
-![train_acc](../images/train_acc.svg)|![train_loss](../images/train_loss.svg)
+![train_acc](../images/train_acc.svg "Acc") ![train_loss](../images/train_loss.svg "Loss")
 
 - Validation
 ![val_acc](../images/val_acc.svg)|![val_loss](../images/val_loss.svg)
