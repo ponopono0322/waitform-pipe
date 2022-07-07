@@ -60,8 +60,12 @@ python Models/run.py -h
 ```
 
 ## Download In-house model
-If you want to use our in-house model, can download zip file in [here](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)(1.04GB)  
-Also, csv file download in [here](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)
+If you want to use our in-house model, can download pt zip file in [here](https://drive.google.com/file/d/1c9kN3U2gk30iOyexRr__B7MEV9hSttQ2/view?usp=sharing)(1.04GB)  
+Also, csv zip file download in [here](https://drive.google.com/file/d/1znx3eplfHFf8UcUX5Z-E9eDIG3cQzxQI/view?usp=sharing)(7.1MB)
 
 ## Test
-_This will update soon_
+|Mode|Accuracy|Loss|
+|:--:|:------:|:--:|
+|Train|![train_acc](../images/train_acc.svg)|![train_loss](../images/train_loss.svg)|
+|Validation|![val_acc](../images/val_acc.svg)|![val_loss](../images/val_loss.svg)
+
