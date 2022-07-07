@@ -45,7 +45,8 @@ waitform-pipe
 참고해주세요
 
 ## Prerequisites
-- python 3.8
+- python 3.8 or conda prompt
+- Docker
 - 각 모듈별 필요 라이브러리는 각 폴더에 있는 `requirements.txt`를 참고해주세요.
 
 ## Environment Setting
@@ -77,9 +78,14 @@ waitform-pipe
   ```
 
 3. Docker
-- 준비중입니다
+_Note: silicon mac의 경우 cuda를 사용할 수 없으므로 dockerfile의 FROM을 `pytorch`에서 `python:3.8`으로 수정하세요_
+- 이미지를 생성합니다
   ```bash
-  # please wait
+  docker build -t waitform-pipe .
+  ```
+- 컨테이너를 생성 및 백그라운드 실행합니다
+  ```bash
+  docker run -dp 8080:80 --name waitfrom waitform-pipe
   ```
 
 ## Quick Start
