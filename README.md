@@ -1,6 +1,9 @@
 # waitform-pipe
-이 레포는 [ALGO-LEARN/waitForm](https://github.com/ALGO-LEARN/waitForm)에 기반합니다.  
-프로젝트 중 수행했던 작업에 대한 설명과 일부 작업 자동화를 수행하였습니다. 전체 프로세스에 대한 정보는 위의 링크를 참고해주세요.
+이 레포는 [ALGO-LEARN/waitForm](https://github.com/ALGO-LEARN/waitForm)에서 담당 파트를 Pipe-line 적용한 레포입니다.  
+전체 프로세스에 대한 정보는 위의 링크를 참고하세요.  
+
+## Quick Start
+
 
 ## Directory Info
 ```bash
@@ -38,10 +41,10 @@ waitform-pipe
 └── README.md       # readme
 ```
 
-- 데이터 수집에 관한 내용은 `Crawling` 폴더를,
+- 데이터 수집에 관한 내용은 [Crawling](./Crawling/) 폴더를,
 - 모델 학습에 관한 내용은 `Models` 폴더를,
 - 데이터베이스와 연동하여 추론하는 과정은 `Firebase` 폴더를,
-- 앞의 과정을 파이프라인화 하는 RestAPI는 `API` 폴더를 _이 폴더는 아직 미완성입니다_
+- 앞의 과정을 파이프라인화 하는 RestAPI는 `API` 폴더를 _이 폴더는 아직 미완성입니다_  
 참고해주세요
 
 ## Prerequisites
@@ -88,4 +91,3 @@ _Note: silicon mac의 경우 cuda를 사용할 수 없으므로 dockerfile의 FR
   docker run -dp 8080:80 --name waitfrom waitform-pipe
   ```
 
-## Quick Start
