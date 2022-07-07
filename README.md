@@ -88,3 +88,11 @@ waitform-pipe
   pip install -r requirements.txt
   ```
 
+## Pipe-line
+데이터 수집과정과 학습과정을 파이프라인으로 만들었습니다.
+![model](./images/model.jpg)
+
+이 과정을 수행하려면 아래 명령어를 따르세요.
+```bash
+# please wait
+```
