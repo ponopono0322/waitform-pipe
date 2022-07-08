@@ -14,7 +14,7 @@ def predict():
     #     return jsonify({'name':tmp1, 'jsuo':tmp2})
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=8000)
 
 
 """
