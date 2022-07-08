@@ -1,6 +1,17 @@
 # Models
 우리 프로젝트에서 사용했던 Classification 학습 모델입니다.
 
+## Contents
+- [Models](#models)
+  - [Contents](#contents)
+  - [Directory Info](#directory-info)
+  - [Spec](#spec)
+  - [Train](#train)
+  - [Evaluate](#evaluate)
+  - [Reasoning](#reasoning)
+  - [Download In-house model](#download-in-house-model)
+  - [Result](#result)
+
 ## Directory Info
 ```bash
 waitform-pipe
@@ -31,7 +42,7 @@ python Models/run.py --mode "train" --epoch [int]
 python Models/run.py --mode "eval"
 ```
 
-## Evaluate your data
+## Reasoning
 자체 데이터로 결과를 얻고자 하는 경우는 `class_type`에 0~9 사이의 숫자를, `senetence`는 문장을 넣으세요.  
 `class_type`에 대한 정보는 아래를 참고하세요.  
 
