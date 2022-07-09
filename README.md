@@ -101,5 +101,15 @@ selenium을 이용해 크롤링을 진행하였으며, 이 과정을 flask의 re
 _이 이후 과정은 미완성입니다_  
 이 과정을 수행하려면 아래 명령어를 따르세요. 
 ```bash
-# please wait
+# 먼저 Crwaling 폴더로 이동합니다
+cd Crawling
+
+# 도커 이미지를 만듭니다
+docker build -t wfcw .
+
+# 도커 컨테이너를 생성 및 백그라운드 실행합니다. 포트번호는 2223과 8001을 사용합니다
+docker run -dp 2223:8001 --name cw wfcw
+
+# httpie를 사용하여 크롤링을 수행합니다. 보통 10분 이내로 걸리므로 timeout을 크게 잡습니다
+http -v GET localhost:2223 --timeout 600
 ```
