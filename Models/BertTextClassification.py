@@ -11,6 +11,7 @@ from torch.optim import Adam
 from tqdm import tqdm
 import pandas as pd
 
+from transformers import BertModel
 from transformers import BertTokenizer
 
 
@@ -23,7 +24,7 @@ def getlabel(path):
 
 path = os.getcwd() + '/Models/data/code_data.csv'   # 데이터셋 경로 
 tokenizer = BertTokenizer.from_pretrained('bert-base-cased')  # 토크나이저 가져오기
-labels = getlabel(path)     # 데이터셋 columns 가쟈오기
+labels = getlabel(path)     # 데이터셋 columns 가져오기
 
 class Dataset(torch.utils.data.Dataset):
 
@@ -61,14 +62,14 @@ class BertClassifier(nn.Module):
 
         super(BertClassifier, self).__init__()
 
-        self.bert = tokenizer                   # bert-base-cased 모델
+        self.bert =  BertModel.from_pretrained('bert-base-cased')   # bert-base-cased 모델
         self.dropout = nn.Dropout(dropout)      # 드롭아웃 0.5
         self.linear = nn.Linear(768, 10)        # 10개의 클래스를 사용하기 때문
         self.relu = nn.ReLU()                   # Relu 활성화함수
 
     def forward(self, input_id, mask):
 
-        _, pooled_output = self.bert(input_ids= input_id, attention_mask=mask,return_dict=False)
+        _, pooled_output = self.bert(input_ids=input_id, attention_mask=mask, return_dict=False)
         dropout_output = self.dropout(pooled_output)
         linear_output = self.linear(dropout_output)
         final_layer = self.relu(linear_output)
