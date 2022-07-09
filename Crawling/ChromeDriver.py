@@ -15,10 +15,7 @@ class chromedriver(ABC):
         if not debug:                                # 디버그 수행시 창 띄워서 진행
             options.add_argument("headless")         # 백그라운드 실행
             options.add_argument('no-sandbox')
-            # options.add_argument("single-process")
             options.add_argument("disable-dev-shm-usage")
-            options.add_argument("disable-gpu") 
-            options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(
             service=Service(path), chrome_options=options)  # 크롬 브라우저 사용하기
         self.link_col = ['position', 'link', 'visited']     # 링크 데이터 열 정보
