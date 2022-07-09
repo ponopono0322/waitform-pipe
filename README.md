@@ -3,7 +3,7 @@
 전체 프로세스에 대한 정보는 위의 링크를 참고하세요.  
 
 ## Quick Start
-_Note: silicon mac의 경우 cuda를 사용할 수 없으므로 dockerfile의 FROM을 `pytorch`에서 `python:3.8`으로 수정하세요_
+_Note: Recommend linux amd64_
 - 이미지를 생성합니다
   ```bash
   docker build -t waitform-pipe .
@@ -64,9 +64,12 @@ waitform-pipe
 `pip list --format=freeze > requirements.txt`  
 아래 중 익숙한 방식으로 환경으로 구성하세요.  
 1. Conda
-- `requirements.yaml` 파일로 가상환경과 라이브러리를 함께 설치합니다.
+- `enviroment.yaml` 파일로 가상환경과 라이브러리를 함께 설치합니다.
   ```bash
-  conda env create -f requirements.yaml
+  # amd64/x86_64
+  conda env create -f enviroment.yaml
+  # arm64(for silicon mac)
+  conda env create -f enviroment_arm64.yaml
   ```
 - 아래의 명령어로 만들어진 가상환경을 실행시킵니다.
   ```bash
@@ -99,7 +102,7 @@ selenium을 이용해 크롤링을 진행하였으며, 이 과정을 flask의 re
 ![model](./images/model.jpg)
 
 _이 이후 과정은 미완성입니다_  
-이 과정을 수행하려면 아래 명령어를 따르세요. 
+- 크롤링 과정을 수행하려면 아래 명령어를 따르세요. 
 ```bash
 # 먼저 Crwaling 폴더로 이동합니다
 cd Crawling
@@ -107,9 +110,24 @@ cd Crawling
 # 도커 이미지를 만듭니다
 docker build -t wfcw .
 
-# 도커 컨테이너를 생성 및 백그라운드 실행합니다. 포트번호는 2223과 8001을 사용합니다
+# 도커 컨테이너를 생성 및 백그라운드 실행합니다. 포트번호는 2223와 8001을 사용합니다
 docker run -dp 2223:8001 --name cw wfcw
 
 # httpie를 사용하여 크롤링을 수행합니다. 보통 10분 이내로 걸리므로 timeout을 크게 잡습니다
 http -v GET localhost:2223 --timeout 600
+```
+
+- 모델 학습과정을 수행하려면 아래 명령어를 따르세요.
+```bash
+# Models 폴더로 이동합니다.
+cd ../Models
+
+# 도커 이미지를 만듭니다
+docekr build -t wfmd .
+
+# 도커 컨테이너 생성 및 백그라운드 실행합니다. 포트번호는 2224와 8002을 사용합니다
+docker run -dp 2224:8002 --name md wfmd
+
+# httpie를 사용하여 크롤링을 수행합니다. timeout되도 작업은 수행되므로 http timeout error를 무시합니다
+http -v -j POST localhost:2223 request=True
 ```
