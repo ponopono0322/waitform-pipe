@@ -36,7 +36,7 @@ class ModelControl:
             start_epoch = checkpoint['epoch']
             EPOCHS += start_epoch
 
-        train(self.model, self.df_train, self.df_val, LR, start_epoch, EPOCHS)
+        train(self.model, self.df_train, self.df_val, LR, start_epoch, EPOCHS, model_path)
 
     def evaluater(self, model_path):
         self.getmodel()
