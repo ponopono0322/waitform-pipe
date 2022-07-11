@@ -1,5 +1,5 @@
-FROM pytorch:1.9.0-cuda10.2-cudnn7-devel
-# FROM python:3.8
+FROM pytorch/pytorch:1.9.0-cuda10.2-cudnn7-devel
+
 COPY . /app/waitform-pipe
 
 WORKDIR /app/waitform-pipe
