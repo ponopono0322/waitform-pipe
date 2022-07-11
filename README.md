@@ -129,5 +129,5 @@ docekr build -t wfmd .
 docker run -dp 2224:8002 --name md wfmd
 
 # httpie를 사용하여 크롤링을 수행합니다. timeout되도 작업은 수행되므로 http timeout error를 무시합니다
-http -v -j POST localhost:2223 request=True
+http -v -j POST localhost:2224 request=True
 ```
